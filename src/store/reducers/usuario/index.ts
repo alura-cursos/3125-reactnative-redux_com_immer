@@ -42,6 +42,10 @@ const usuarioSlice = createSlice({
     },
     alterarUsuario: (state, action: PayloadAction<Partial<Usuario>>) => {
       Object.assign(state.usuarioLogado as Usuario, action.payload);
+      const idAtual = state.usuarioLogado!.id;
+      const index =
+        state.usuarios.findIndex(usuario => usuario.id === idAtual);
+      Object.assign(state.usuarios[index], action.payload);
     },
     excluirUsuario: (state, action: PayloadAction<Usuario['id']>) => {
       const novoArrayDeUsuarios = 
