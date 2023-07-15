@@ -44,12 +44,10 @@ const usuarioSlice = createSlice({
       Object.assign(state, { usuarioLogado: action.payload });
     },
     excluirUsuario: (state, action: PayloadAction<Usuario['id']>) => {
-      return {
-        ...state,
-        usuarios:
-          state.usuarios.filter(usuario => usuario.id !== action.payload),
-        usuarioLogado: undefined,
-      }
+      const novoArrayDeUsuarios = 
+        state.usuarios.filter(usuario => usuario.id !== action.payload);
+      state.usuarioLogado = undefined;
+      state.usuarios = novoArrayDeUsuarios;
     }
   },
 });
