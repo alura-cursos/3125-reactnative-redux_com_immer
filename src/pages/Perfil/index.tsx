@@ -6,8 +6,6 @@ import { Button, Card, Divider, TextInput, Title } from 'react-native-paper';
 import DatePicker from 'src/components/DatePicker';
 import { useState } from 'react';
 import GenderPicker from 'src/components/GenderPicker';
-import { Usuario } from 'src/types/usuario';
-import { excluirUsuario, mudarDadosUsuario } from 'src/services/usuarios';
 import useSnackbar from 'src/contexts/Snackbar';
 import theme from 'src/config/theme';
 import { DrawerScreenProps } from '@react-navigation/drawer';
