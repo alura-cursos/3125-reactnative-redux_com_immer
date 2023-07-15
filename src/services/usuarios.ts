@@ -8,8 +8,12 @@ export const carregarUsuarios = (): Promise<Usuario[]> => {
   return new Promise((resolve) => setTimeout(() => resolve(usuarios), 1000));
 };
 
-export const logar = (emailOuCpf: Usuario['email'] | Usuario['cpf'], senha: Usuario['senha']) => {
-  const usuario = usuarios.find((usuarioNoServidor) =>
+export const usuarioExistente = (
+  arrayDeUsuarios: Usuario[],
+  emailOuCpf: Usuario['email'] | Usuario['cpf'],
+  senha: Usuario['senha']
+) => {
+  const usuario = arrayDeUsuarios.find((usuarioNoServidor) =>
     [usuarioNoServidor.cpf, usuarioNoServidor.email].includes(emailOuCpf) && senha === usuarioNoServidor.senha
   );
   return usuario;
