@@ -12,7 +12,7 @@ import { DrawerScreenProps } from '@react-navigation/drawer';
 import { RootStackParamList } from 'src/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { alterarUsuario } from 'src/store/reducers/usuario';
+import { alterarUsuario, excluirUsuario } from 'src/store/reducers/usuario';
 import { Usuario } from 'src/types/usuario';
 
 export default function Perfil({ navigation }: DrawerScreenProps<RootStackParamList, "Perfil">) {
@@ -43,16 +43,13 @@ export default function Perfil({ navigation }: DrawerScreenProps<RootStackParamL
       email,
       senha
     }
-    // mudarDadosUsuario(novosDados);
-    // setUsuarioLogado(novosDados);
     dispatch(alterarUsuario(novosDados));
     criarMensagem.sucesso('Dados alterados com sucesso!');
     navigation.navigate('Home');
   }
 
   const handleExcluir = () => {
-    // excluirUsuario(usuarioLogado.id);
-    // setUsuarioLogado(undefined);
+    dispatch(excluirUsuario(usuarioLogado!.id));
     criarMensagem.sucesso('Conta excluida com sucesso!');
     navigation.navigate('Home');
   }
