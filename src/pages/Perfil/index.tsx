@@ -10,8 +10,10 @@ import useSnackbar from 'src/contexts/Snackbar';
 import theme from 'src/config/theme';
 import { DrawerScreenProps } from '@react-navigation/drawer';
 import { RootStackParamList } from 'src/routes';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
+import { alterarUsuario } from 'src/store/reducers/usuario';
+import { Usuario } from 'src/types/usuario';
 
 export default function Perfil({ navigation }: DrawerScreenProps<RootStackParamList, "Perfil">) {
   const usuarioLogado = useSelector((state: RootState) => state.usuario.usuarioLogado);
@@ -27,22 +29,23 @@ export default function Perfil({ navigation }: DrawerScreenProps<RootStackParamL
   const [senha, setSenha] = useState(usuarioLogado?.senha);
   const [confirmarSenha, setConfirmarSenha] = useState(usuarioLogado?.senha);
   const { criarMensagem } = useSnackbar();
+  const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    // const novosDados: Usuario = {
-    //   id: usuarioLogado?.id,
-    //   nome,
-    //   dataNascimento,
-    //   genero,
-    //   cpf,
-    //   telefone,
-    //   cidade,
-    //   estado,
-    //   email,
-    //   senha
-    // }
+    const novosDados: Partial<Usuario> = {
+      nome,
+      dataNascimento,
+      genero,
+      cpf,
+      telefone,
+      cidade,
+      estado,
+      email,
+      senha
+    }
     // mudarDadosUsuario(novosDados);
     // setUsuarioLogado(novosDados);
+    dispatch(alterarUsuario(novosDados));
     criarMensagem.sucesso('Dados alterados com sucesso!');
     navigation.navigate('Home');
   }

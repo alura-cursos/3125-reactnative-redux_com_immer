@@ -39,10 +39,13 @@ const usuarioSlice = createSlice({
       const novoUsuario = { ...action.payload, id };
       state.usuarios.push(novoUsuario);
       state.usuarioLogado = novoUsuario;
+    },
+    alterarUsuario: (state, action: PayloadAction<Partial<Usuario>>) => {
+      Object.assign(state, { usuarioLogado: action.payload });
     }
   },
 });
 
-export const { logar, deslogar, cadastrar } = usuarioSlice.actions;
+export const { logar, deslogar, cadastrar, alterarUsuario } = usuarioSlice.actions;
 
 export default usuarioSlice.reducer;
